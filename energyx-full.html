@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EnergyX – AI-Powered Smart Energy Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#04090E;
+  --bg2:#081220;
+  --bg3:#0C1A2C;
+  --accent:#00D4AA;
+  --accent2:#0099FF;
+  --accent3:#FFB800;
+  --red:#FF4D4D;
+  --text:#EEF2F7;
+  --muted:#6B8299;
+  --border:rgba(0,212,170,0.13);
+  --border2:rgba(255,255,255,0.07);
+  --card:rgba(8,18,32,0.9);
+  --radius:14px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(4,9,14,0.75);backdrop-filter:blur(24px);border-bottom:0.5px solid var(--border);transition:transform .3s}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:-.03em;display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text)}
+.logo-mark{width:30px;height:30px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-right{display:flex;gap:.8rem;align-items:center}
+.btn-nav{padding:.45rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;transition:.2s}
+.btn-outline{background:transparent;color:var(--text);border:0.5px solid var(--border2)}
+.btn-outline:hover{border-color:rgba(0,212,170,.4);background:rgba(0,212,170,.05)}
+.btn-filled{background:var(--accent);color:#04090E;border:none}
+.btn-filled:hover{opacity:.85}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9rem 2rem 5rem;position:relative;text-align:center;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,170,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent)}
+.hero-glow{position:absolute;top:15%;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,212,170,.07) 0%,transparent 65%);pointer-events:none}
+.hero-glow2{position:absolute;top:25%;left:20%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(0,153,255,.05) 0%,transparent 65%);pointer-events:none}
+.pill{display:inline-flex;align-items:center;gap:.45rem;background:rgba(0,212,170,.08);border:0.5px solid rgba(0,212,170,.25);color:var(--accent);font-size:.72rem;padding:.3rem .85rem;border-radius:100px;margin-bottom:2rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;animation:fadeUp .6s ease both}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,5.5vw,5.2rem);font-weight:800;line-height:1.04;letter-spacing:-.04em;margin-bottom:1.5rem;animation:fadeUp .6s .1s ease both}
+.h1-green{color:var(--accent)}
+.h1-blue{color:var(--accent2)}
+.hero-desc{font-size:1.05rem;color:var(--muted);max-width:540px;margin:0 auto 2.5rem;font-weight:300;line-height:1.75;animation:fadeUp .6s .2s ease both}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
+.btn-hero-p{background:var(--accent);color:#04090E;border:none;padding:.9rem 2.2rem;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:.2s}
+.btn-hero-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,170,.28)}
+.btn-hero-s{background:transparent;color:var(--text);border:0.5px solid var(--border2);padding:.9rem 2.2rem;border-radius:10px;font-size:.95rem;font-weight:400;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:.2s}
+.btn-hero-s:hover{border-color:rgba(0,212,170,.35);background:rgba(0,212,170,.04)}
+.stats-row{display:flex;gap:0;border:0.5px solid var(--border);border-radius:16px;background:var(--card);overflow:hidden;margin-top:4rem;backdrop-filter:blur(20px);animation:fadeUp .6s .4s ease both;max-width:680px;width:100%}
+.stat{flex:1;padding:1.3rem 1.5rem;text-align:center;border-right:0.5px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:700;color:var(--accent);line-height:1;margin-bottom:.3rem}
+.stat-l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== TRUSTED ===== */
+.trusted{padding:3rem 2rem;border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2);background:var(--bg2)}
+.trusted-inner{max-width:1100px;margin:0 auto;text-align:center}
+.trusted-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:1.8rem}
+.badges-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.badge-item{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.03);border:0.5px solid var(--border2);border-radius:10px;padding:.6rem 1.2rem;font-size:.82rem;color:var(--muted);font-weight:400}
+.badge-item span{color:var(--accent);font-weight:500}
+
+/* ===== SECTION COMMONS ===== */
+.sec{padding:7rem 2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.sec-tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:600;margin-bottom:.7rem}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.2vw,2.7rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:1rem}
+.sec-desc{color:var(--muted);font-size:.97rem;max-width:500px;font-weight:300;line-height:1.75}
+.sec-header-split{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.vis{opacity:1;transform:translateY(0)}
+
+/* ===== PROBLEM ===== */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3.5rem}
+.prob-card{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);padding:2rem;position:relative;overflow:hidden;transition:border-color .3s}
+.prob-card:hover{border-color:rgba(255,77,77,.3)}
+.prob-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
+.prob-icon{font-size:1.8rem;margin-bottom:1rem}
+.prob-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:600;margin-bottom:.5rem}
+.prob-text{font-size:.875rem;color:var(--muted);line-height:1.65;font-weight:300}
+
+/* ===== SOLUTION ===== */
+.sol-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:0}
+.sol-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.sol-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.sol-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem}
+.sol-item{display:flex;align-items:flex-start;gap:.8rem;padding:.75rem;border-radius:10px;background:rgba(0,212,170,.04);border:0.5px solid rgba(0,212,170,.1)}
+.sol-check{width:22px;height:22px;border-radius:6px;background:rgba(0,212,170,.15);display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;margin-top:.1rem}
+.sol-item-text{font-size:.875rem;line-height:1.6;color:var(--muted);font-weight:300}
+.sol-item-text strong{color:var(--text);font-weight:500}
+
+/* ===== HOW IT WORKS ===== */
+.how-bg{background:var(--bg2);border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2)}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border2);border:0.5px solid var(--border2);border-radius:16px;overflow:hidden;margin-top:3.5rem}
+.step{background:var(--bg2);padding:2rem 1.8rem;position:relative;transition:background .3s}
+.step:hover{background:var(--bg3)}
+.step-num{font-family:'Syne',sans-serif;font-size:.65rem;color:rgba(0,212,170,.35);letter-spacing:.1em;font-weight:700;margin-bottom:1.2rem}
+.step-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.2rem}
+.step-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+.step-text{font-size:.82rem;color:var(--muted);line-height:1.65;font-weight:300}
+
+/* ===== FEATURES ===== */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3.5rem}
+.feat-card{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.8rem;transition:.3s;position:relative}
+.feat-card:hover{border-color:var(--border);background:var(--bg3)}
+.feat-ico{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:1.3rem}
+.feat-title{font-family:'Syne',sans-serif;font-size:.97rem;font-weight:600;margin-bottom:.5rem}
+.feat-text{font-size:.84rem;color:var(--muted);line-height:1.65;font-weight:300}
+.feat-tag{display:inline-block;font-size:.68rem;padding:.2rem .6rem;border-radius:100px;font-weight:500;margin-top:.8rem;text-transform:uppercase;letter-spacing:.04em}
+
+/* ===== LIVE DEMO ===== */
+.demo-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start;margin-top:3.5rem}
+.demo-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;overflow:hidden}
+.demo-header{padding:1rem 1.5rem;border-bottom:0.5px solid var(--border2);display:flex;align-items:center;justify-content:space-between}
+.demo-title-sm{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.live-dot{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--accent)}
+.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.5s infinite}
+.device-list{padding:0 1.5rem 1.5rem}
+.dev-row{display:flex;align-items:center;gap:.8rem;padding:.75rem 0;border-bottom:0.5px solid rgba(107,130,153,.08)}
+.dev-row:last-child{border-bottom:none}
+.dev-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.dev-name{font-size:.84rem;font-weight:500}
+.dev-val{font-size:.74rem;color:var(--muted)}
+.dev-badge{font-size:.7rem;padding:.2rem .55rem;border-radius:100px;font-weight:500;flex-shrink:0}
+.badge-on{background:rgba(0,212,170,.1);color:var(--accent)}
+.badge-warn{background:rgba(255,184,0,.1);color:var(--accent3)}
+.badge-off{background:rgba(107,130,153,.1);color:var(--muted)}
+.demo-total{padding:1rem 1.5rem;background:rgba(0,212,170,.04);border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.demo-side{}
+.chart-card{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.2rem}
+.chart-title{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem}
+.bar-group{display:flex;align-items:flex-end;gap:.4rem;height:90px}
+.bar{flex:1;border-radius:4px 4px 0 0;position:relative;min-width:0;transition:opacity .2s}
+.bar:hover{opacity:.8}
+.bar-label{font-size:.62rem;color:var(--muted);text-align:center;margin-top:.3rem}
+.ai-card{background:rgba(0,212,170,.05);border:0.5px solid rgba(0,212,170,.2);border-radius:var(--radius);padding:1.2rem}
+.ai-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+.ai-badge{font-size:.65rem;background:rgba(0,212,170,.15);color:var(--accent);padding:.2rem .6rem;border-radius:100px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.ai-text{font-size:.84rem;color:var(--muted);line-height:1.6;font-weight:300}
+.ai-text strong{color:var(--text);font-weight:500}
+
+/* ===== MILESTONES ===== */
+.mile-bg{background:var(--bg2);border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2)}
+.mile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3.5rem}
+.mile-card{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius);padding:2rem;transition:.3s}
+.mile-card:hover{border-color:var(--border)}
+.mile-ico{font-size:1.6rem;margin-bottom:1rem}
+.mile-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.mile-sub{font-size:.82rem;color:var(--muted);line-height:1.6;font-weight:300}
+.mile-tag{display:inline-block;font-size:.7rem;padding:.25rem .7rem;border-radius:100px;font-weight:500;margin-top:.8rem}
+
+/* ===== MARKET ===== */
+.market-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center}
+.market-cards{display:flex;flex-direction:column;gap:1rem}
+.market-seg{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.4rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;transition:.3s}
+.market-seg:hover{border-color:var(--border)}
+.seg-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.seg-title{font-size:.9rem;font-weight:500;margin-bottom:.25rem}
+.seg-text{font-size:.82rem;color:var(--muted);line-height:1.55;font-weight:300}
+.revenue-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;padding:2rem}
+.rev-title{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.5rem}
+.rev-item{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+.rev-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.rev-label{font-size:.85rem;font-weight:400;flex:1}
+.rev-pct{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700}
+.rev-bar-wrap{margin-top:.5rem;height:4px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}
+.rev-bar{height:100%;border-radius:4px;transition:width 1s ease}
+
+/* ===== TEAM ===== */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3.5rem}
+.team-card{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.8rem 1.4rem;text-align:center;transition:.3s}
+.team-card:hover{transform:translateY(-4px);border-color:var(--border)}
+.avatar{width:60px;height:60px;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700}
+.mem-name{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:.3rem}
+.mem-role{font-size:.78rem;color:var(--muted);line-height:1.4}
+
+/* ===== ROADMAP ===== */
+.road-bg{background:var(--bg2);border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2)}
+.road-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3.5rem;position:relative}
+.road-card{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.6rem;transition:.3s}
+.road-card.current{border-color:var(--accent);background:rgba(0,212,170,.03)}
+.road-phase{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.6rem}
+.road-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:.8rem}
+.road-items{display:flex;flex-direction:column;gap:.4rem}
+.road-item{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;font-weight:300}
+.road-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--muted);flex-shrink:0}
+.road-item.done{color:var(--accent)}
+.road-item.done::before{background:var(--accent)}
+
+/* ===== CONTACT ===== */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start}
+.contact-info-block{}
+.c-info-item{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1.8rem}
+.c-info-ico{width:40px;height:40px;border-radius:10px;background:rgba(0,212,170,.08);border:0.5px solid rgba(0,212,170,.18);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.c-info-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.25rem}
+.c-info-val{font-size:.9rem;color:var(--text);font-weight:400}
+.contact-form-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;padding:2.2rem;backdrop-filter:blur(20px)}
+.f-group{margin-bottom:1.1rem}
+.f-label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.45rem;letter-spacing:.01em}
+.f-input,.f-textarea{width:100%;background:rgba(255,255,255,.03);border:0.5px solid rgba(107,130,153,.2);border-radius:9px;padding:.72rem 1rem;color:var(--text);font-family:'Inter',sans-serif;font-size:.875rem;transition:.2s;outline:none}
+.f-input:focus,.f-textarea:focus{border-color:rgba(0,212,170,.45)}
+.f-textarea{resize:vertical;min-height:100px}
+.f-btn{width:100%;background:var(--accent);color:#04090E;border:none;padding:.85rem;border-radius:9px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s;margin-top:.3rem}
+.f-btn:hover{opacity:.85;transform:translateY(-1px)}
+.f-success{display:none;background:rgba(0,212,170,.08);border:0.5px solid rgba(0,212,170,.25);color:var(--accent);border-radius:9px;padding:.75rem 1rem;font-size:.84rem;text-align:center;margin-top:.8rem}
+
+/* ===== DOWNLOAD ===== */
+.dl-section{background:var(--bg2);border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2);padding:6rem 2rem;text-align:center;position:relative;overflow:hidden}
+.dl-glow{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(0,212,170,.07) 0%,transparent 70%);pointer-events:none}
+.dl-inner{max-width:580px;margin:0 auto;position:relative;z-index:1}
+.store-btn{display:inline-flex;align-items:center;gap:.9rem;background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:.9rem 1.8rem;color:var(--text);text-decoration:none;font-size:.87rem;font-weight:500;transition:.2s;margin-top:1.8rem}
+.store-btn:hover{border-color:rgba(0,212,170,.35);transform:translateY(-2px)}
+.store-ic{font-size:1.5rem}
+
+/* ===== FOOTER ===== */
+footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid var(--border2);color:var(--muted);font-size:.8rem;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text)}
+.footer-logo span{color:var(--accent)}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.8rem;transition:.2s}
+.footer-links a:hover{color:var(--accent)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .problem-grid,.sol-wrap,.demo-wrap,.market-wrap,.contact-wrap{grid-template-columns:1fr}
+  .steps-grid,.feat-grid,.mile-grid,.road-grid{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+}
+@media(max-width:600px){
+  .steps-grid,.feat-grid,.mile-grid,.road-grid,.team-grid{grid-template-columns:1fr}
+  h1{font-size:2.3rem}
+  .stats-row{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo"><div class="logo-mark">⚡</div>Energy<span>X</span></a>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#milestones">Milestones</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#download" class="btn-nav btn-outline">Download App</a>
+    <a href="#contact" class="btn-nav btn-filled">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="pill"><div class="dot"></div>AI-Powered Smart Energy Platform</div>
+  <h1>Monitor. Analyze.<br><span class="h1-green">Save Energy</span><br>with <span class="h1-blue">AI</span></h1>
+  <p class="hero-desc">EnergyX helps households and businesses track, analyze, and optimize energy consumption in real time — using AI-driven insights, smart device integration, and personalized recommendations.</p>
+  <div class="hero-cta">
+    <a href="#features" class="btn-hero-p">⚡ Explore Features</a>
+    <a href="#download" class="btn-hero-s">Download App →</a>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n">100+</div><div class="stat-l">App Downloads</div></div>
+    <div class="stat"><div class="stat-n">25%</div><div class="stat-l">Avg. Savings</div></div>
+    <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">AI Suggestions</div></div>
+    <div class="stat"><div class="stat-n">358+</div><div class="stat-l">LinkedIn Followers</div></div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<div class="trusted fade-in">
+  <div class="trusted-inner">
+    <div class="trusted-label">Recognized & Supported by</div>
+    <div class="badges-row">
+      <div class="badge-item">🚀 <span>Startup School 4</span> — Five Continents · 500 Startups</div>
+      <div class="badge-item">🏆 <span>2nd Place</span> — ASSIP Incubation Program</div>
+      <div class="badge-item">💰 <span>12,000 AZN</span> Prize Winner</div>
+      <div class="badge-item">🏛️ <span>BEU Technopark</span> Azerbaijan</div>
+      <div class="badge-item">🌐 <span>Enterprise Azerbaijan</span> Graduate</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="sec" id="problem">
+  <div class="fade-in">
+    <div class="sec-tag">The Problem</div>
+    <div class="sec-title">Energy waste is invisible —<br>until the bill arrives</div>
+    <p class="sec-desc">Most households and businesses have no clear picture of where their energy goes. This leads to significant waste, higher costs, and environmental impact.</p>
+  </div>
+  <div class="problem-grid fade-in">
+    <div class="prob-card">
+      <div class="prob-icon">📊</div>
+      <div class="prob-title">No Real-Time Visibility</div>
+      <div class="prob-text">People don't know which appliance consumes how much energy. Without granular data, smart decisions are impossible and energy waste goes unnoticed for months.</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">💸</div>
+      <div class="prob-title">Unpredictable Bills</div>
+      <div class="prob-text">Electricity bills arrive with no explanation. Users have no way to correlate consumption spikes with specific devices or behaviors, making cost reduction feel impossible.</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">⚠️</div>
+      <div class="prob-title">No Early Warning System</div>
+      <div class="prob-text">Overloaded sockets, overheating appliances, and abnormal current draw create fire and safety risks — all invisible without smart monitoring and alerts.</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">🌍</div>
+      <div class="prob-title">Growing Environmental Cost</div>
+      <div class="prob-text">Inefficient energy use contributes to higher carbon emissions. Without actionable insights, even well-meaning users can't make a meaningful environmental impact.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="sec" id="solution" style="padding-top:0">
+  <div class="fade-in">
+    <div class="sec-tag">Our Solution</div>
+    <div class="sec-title">Active management,<br>not just monitoring</div>
+  </div>
+  <div class="sol-wrap" style="margin-top:3rem">
+    <div class="fade-in">
+      <p style="color:var(--muted);font-size:.97rem;line-height:1.75;font-weight:300;margin-bottom:1.5rem">EnergyX is an AI-powered mobile platform that transforms how households and businesses interact with energy. Unlike simple meters or dashboards, EnergyX actively helps users understand, optimize, and save — turning energy efficiency into a daily habit.</p>
+      <p style="color:var(--muted);font-size:.97rem;line-height:1.75;font-weight:300">By integrating with existing smart devices like Shelly EM and smart meters through full API support, users don't need additional hardware to get started. The platform provides deep analytics, real-time alerts, and personalized AI-driven savings strategies.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem">
+        <div style="background:rgba(0,212,170,.08);border:0.5px solid rgba(0,212,170,.2);border-radius:10px;padding:.6rem 1.2rem;font-size:.82rem;color:var(--accent);font-weight:500">✓ No extra hardware needed</div>
+        <div style="background:rgba(0,153,255,.08);border:0.5px solid rgba(0,153,255,.2);border-radius:10px;padding:.6rem 1.2rem;font-size:.82rem;color:var(--accent2);font-weight:500">✓ Full API integration</div>
+        <div style="background:rgba(255,184,0,.08);border:0.5px solid rgba(255,184,0,.2);border-radius:10px;padding:.6rem 1.2rem;font-size:.82rem;color:var(--accent3);font-weight:500">✓ AI-personalized insights</div>
+      </div>
+    </div>
+    <div class="sol-card fade-in">
+      <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.2rem">What EnergyX Does Differently</div>
+      <div class="sol-list">
+        <div class="sol-item"><div class="sol-check">✓</div><div class="sol-item-text"><strong>Full API Integration</strong> — connects to existing energy meters, no extra equipment required to start monitoring immediately.</div></div>
+        <div class="sol-item"><div class="sol-check">✓</div><div class="sol-item-text"><strong>AI-Driven Root Cause Analysis</strong> — deep analytics identify the exact sources of energy consumption and suggest efficient optimizations.</div></div>
+        <div class="sol-item"><div class="sol-check">✓</div><div class="sol-item-text"><strong>Interactive Education</strong> — users learn about energy efficiency through in-app guides, building lasting habits and reducing waste long-term.</div></div>
+        <div class="sol-item"><div class="sol-check">✓</div><div class="sol-item-text"><strong>Real-Time Safety Alerts</strong> — instant notifications for overloads, overheating, and abnormal current draw before they become dangerous.</div></div>
+        <div class="sol-item"><div class="sol-check">✓</div><div class="sol-item-text"><strong>Mobile-First Experience</strong> — intuitive interface accessible anywhere, with both web and mobile platforms for maximum convenience.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-bg">
+  <section class="sec" id="how">
+    <div class="fade-in">
+      <div class="sec-tag">How It Works</div>
+      <div class="sec-title">Four simple steps to smarter energy</div>
+    </div>
+    <div class="steps-grid fade-in">
+      <div class="step">
+        <div class="step-num">STEP 01</div>
+        <div class="step-icon" style="background:rgba(0,212,170,.1)">🔌</div>
+        <div class="step-title">Connect Your Devices</div>
+        <div class="step-text">Link your existing smart devices — Shelly EM, smart meters, or any API-compatible hardware. No additional equipment required.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 02</div>
+        <div class="step-icon" style="background:rgba(0,153,255,.1)">📡</div>
+        <div class="step-title">Monitor in Real Time</div>
+        <div class="step-text">See live voltage, current, and power consumption for every device in your home or business, updated continuously.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 03</div>
+        <div class="step-icon" style="background:rgba(255,184,0,.1)">🤖</div>
+        <div class="step-title">Get AI Insights</div>
+        <div class="step-text">Our AI analyzes your consumption patterns, detects anomalies, and delivers personalized savings tips tailored to your usage.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 04</div>
+        <div class="step-icon" style="background:rgba(0,212,170,.1)">📈</div>
+        <div class="step-title">Save & Track Progress</div>
+        <div class="step-text">Implement recommendations, track your savings over time, and turn energy efficiency into an effortless daily habit.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FEATURES -->
+<section class="sec" id="features">
+  <div class="sec-header-split fade-in">
+    <div>
+      <div class="sec-tag">Platform Features</div>
+      <div class="sec-title">Everything you need to<br>take control of energy</div>
+    </div>
+    <p class="sec-desc">Six powerful features working together to give you complete visibility and control over your energy usage.</p>
+  </div>
+  <div class="feat-grid fade-in">
+    <div class="feat-card">
+      <div class="feat-ico" style="background:rgba(0,212,170,.1)">📊</div>
+      <div class="feat-title">Live Device Monitoring</div>
+      <div class="feat-text">Track every connected appliance in real time. See exactly which devices are driving your electricity bill with live voltage, current, and wattage readings.</div>
+      <div class="feat-tag" style="background:rgba(0,212,170,.1);color:var(--accent)">Real-Time</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico" style="background:rgba(0,153,255,.1)">📈</div>
+      <div class="feat-title">Advanced Energy Analytics</div>
+      <div class="feat-text">Visual charts and reports for daily, weekly, and monthly consumption patterns. Spot trends, compare periods, and understand your energy fingerprint.</div>
+      <div class="feat-tag" style="background:rgba(0,153,255,.1);color:var(--accent2)">Analytics</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico" style="background:rgba(255,184,0,.1)">🔔</div>
+      <div class="feat-title">Overload & Risk Alerts</div>
+      <div class="feat-text">Instant push notifications when sockets overheat, devices draw abnormal current, or consumption exceeds thresholds — protecting your home and budget.</div>
+      <div class="feat-tag" style="background:rgba(255,77,77,.1);color:var(--red)">Safety</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico" style="background:rgba(0,212,170,.1)">🤖</div>
+      <div class="feat-title">AI Assistant & Recommendations</div>
+      <div class="feat-text">An integrated AI assistant answers questions, explains consumption patterns in plain language, and suggests concrete personalized actions to save energy.</div>
+      <div class="feat-tag" style="background:rgba(0,212,170,.1);color:var(--accent)">AI-Powered</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico" style="background:rgba(0,153,255,.1)">🔗</div>
+      <div class="feat-title">Smart Device Integration</div>
+      <div class="feat-text">Full API integration with Shelly EM and compatible devices. No special hardware required — connect what you already have and start monitoring immediately.</div>
+      <div class="feat-tag" style="background:rgba(0,153,255,.1);color:var(--accent2)">IoT</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico" style="background:rgba(255,184,0,.1)">🎓</div>
+      <div class="feat-title">Interactive Education Hub</div>
+      <div class="feat-text">Built-in guides and interactive tutorials teach users how to reduce energy waste, making smart energy habits accessible to everyone regardless of technical background.</div>
+      <div class="feat-tag" style="background:rgba(255,184,0,.1);color:var(--accent3)">Education</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<section class="sec" id="demo" style="padding-top:0">
+  <div class="fade-in">
+    <div class="sec-tag">Live Platform Preview</div>
+    <div class="sec-title">See EnergyX in action</div>
+    <p class="sec-desc" style="margin-bottom:0">A real-time view of what your energy dashboard looks like — every device, every watt, always visible.</p>
+  </div>
+  <div class="demo-wrap" style="margin-top:3rem">
+    <div class="fade-in">
+      <div class="demo-card">
+        <div class="demo-header">
+          <div class="demo-title-sm">Live Device Monitor</div>
+          <div class="live-dot">Live</div>
+        </div>
+        <div class="device-list">
+          <div class="dev-row">
+            <div class="dev-icon" style="background:rgba(0,212,170,.1)">🔌</div>
+            <div style="flex:1"><div class="dev-name">Kitchen — Shelly EM 1</div><div class="dev-val">2.4 kW · 220V · 10.9A</div></div>
+            <div class="dev-badge badge-on">Active</div>
+          </div>
+          <div class="dev-row">
+            <div class="dev-icon" style="background:rgba(0,153,255,.1)">❄️</div>
+            <div style="flex:1"><div class="dev-name">Air Conditioner — Bedroom</div><div class="dev-val">1.8 kW · 218V · 8.3A</div></div>
+            <div class="dev-badge badge-on">Active</div>
+          </div>
+          <div class="dev-row">
+            <div class="dev-icon" style="background:rgba(255,184,0,.1)">⚡</div>
+            <div style="flex:1"><div class="dev-name">Garage — EV Charger</div><div class="dev-val">7.2 kW · 225V · 32A</div></div>
+            <div class="dev-badge badge-warn">High Load</div>
+          </div>
+          <div class="dev-row">
+            <div class="dev-icon" style="background:rgba(0,212,170,.1)">💡</div>
+            <div style="flex:1"><div class="dev-name">Office — Workstation Setup</div><div class="dev-val">0.6 kW · 221V · 2.7A</div></div>
+            <div class="dev-badge badge-on">Active</div>
+          </div>
+          <div class="dev-row">
+            <div class="dev-icon" style="background:rgba(107,130,153,.1)">🌡️</div>
+            <div style="flex:1"><div class="dev-name">Boiler — Main Unit</div><div class="dev-val">0.0 kW · 220V · 0.0A</div></div>
+            <div class="dev-badge badge-off">Standby</div>
+          </div>
+        </div>
+        <div class="demo-total">
+          <span style="font-size:.8rem;color:var(--muted)">Total consumption right now</span>
+          <span style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:var(--accent)">12.0 kW</span>
+        </div>
+      </div>
+    </div>
+    <div class="demo-side fade-in">
+      <div class="chart-card">
+        <div class="chart-title">Weekly Energy Usage (kWh)</div>
+        <div style="display:flex;align-items:flex-end;gap:6px;height:100px;padding-bottom:0">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+            <div style="height:55px;width:100%;background:rgba(0,212,170,.35);border-radius:4px 4px 0 0;min-height:8px"></div>
+            <div style="font-size:.62rem;color:var(--muted)">Mon</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+            <div style="height:75px;width:100%;background:rgba(0,212,170,.45);border-radius:4px 4px 0 0;min-height:8px"></div>
+            <div style="font-size:.62rem;color:var(--muted)">Tue</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+            <div style="height:42px;width:100%;background:rgba(0,212,170,.35);border-radius:4px 4px 0 0;min-height:8px"></div>
+            <div style="font-size:.62rem;color:var(--muted)">Wed</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+            <div style="height:88px;width:100%;background:rgba(255,184,0,.5);border-radius:4px 4px 0 0;min-height:8px"></div>
+            <div style="font-size:.62rem;color:var(--accent3)">Thu</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+            <div style="height:60px;width:100%;background:rgba(0,212,170,.35);border-radius:4px 4px 0 0;min-height:8px"></div>
+            <div style="font-size:.62rem;color:var(--muted)">Fri</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+            <div style="height:95px;width:100%;background:rgba(0,153,255,.45);border-radius:4px 4px 0 0;min-height:8px"></div>
+            <div style="font-size:.62rem;color:var(--muted)">Sat</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+            <div style="height:70px;width:100%;background:rgba(0,212,170,.35);border-radius:4px 4px 0 0;min-height:8px"></div>
+            <div style="font-size:.62rem;color:var(--muted)">Sun</div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-head"><div class="ai-badge">AI Insight</div></div>
+        <div class="ai-text"><strong>Thursday spike detected.</strong> Your EV charger ran for 6 hours during peak tariff hours (6–10pm), adding an estimated <strong>$4.20</strong> to your weekly bill. Charging between 11pm–6am could save you up to <strong>28%</strong> on charging costs. Want me to set a smart schedule?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<div class="mile-bg">
+  <section class="sec" id="milestones">
+    <div class="fade-in">
+      <div class="sec-tag">Our Journey</div>
+      <div class="sec-title">Milestones that define us</div>
+      <p class="sec-desc">From a university idea to an internationally recognized startup — here's how far we've come.</p>
+    </div>
+    <div class="mile-grid fade-in">
+      <div class="mile-card">
+        <div class="mile-ico">🏆</div>
+        <div class="mile-title">2nd Place — ASSIP Incubation</div>
+        <div class="mile-sub">Competed in the Innovation and Digital Development Agency's 3-month intensive incubation program, presenting our MVP to a jury panel and earning 2nd place.</div>
+        <div class="mile-tag" style="background:rgba(255,184,0,.1);color:var(--accent3)">💰 12,000 AZN Prize</div>
+      </div>
+      <div class="mile-card">
+        <div class="mile-ico">🚀</div>
+        <div class="mile-title">Startup School 4 — 500 Startups</div>
+        <div class="mile-sub">Selected among international innovators for the global "Five Continents – 500 Startups" program by Enterprise Azerbaijan, backed by 40+ international organizations and venture funds.</div>
+        <div class="mile-tag" style="background:rgba(0,212,170,.1);color:var(--accent)">Global Recognition</div>
+      </div>
+      <div class="mile-card">
+        <div class="mile-ico">📲</div>
+        <div class="mile-title">100+ App Downloads</div>
+        <div class="mile-sub">EnergyX reached 100+ downloads on Google Play, demonstrating real market demand and early user adoption for our AI-powered energy monitoring solution.</div>
+        <div class="mile-tag" style="background:rgba(0,153,255,.1);color:var(--accent2)">Live on Google Play</div>
+      </div>
+      <div class="mile-card">
+        <div class="mile-ico">🔧</div>
+        <div class="mile-title">Hardware Prototype Phase</div>
+        <div class="mile-sub">Completed procurement of all core hardware components. Currently building and testing our proprietary IoT device prototype for real-time energy measurement and safety monitoring.</div>
+        <div class="mile-tag" style="background:rgba(255,184,0,.1);color:var(--accent3)">In Progress</div>
+      </div>
+      <div class="mile-card">
+        <div class="mile-ico">🏛️</div>
+        <div class="mile-title">BEU Technopark & Events</div>
+        <div class="mile-sub">Showcased EnergyX at Baku Engineering University's Technopark exhibition (with Təhsil TV coverage) and at the Ministry of Emergency Situations youth event.</div>
+        <div class="mile-tag" style="background:rgba(0,212,170,.1);color:var(--accent)">Public Exposure</div>
+      </div>
+      <div class="mile-card">
+        <div class="mile-ico">👥</div>
+        <div class="mile-title">358+ LinkedIn Community</div>
+        <div class="mile-sub">Built an engaged professional community of 358+ followers on LinkedIn, with active content around smart energy, IoT, and startup building in Azerbaijan.</div>
+        <div class="mile-tag" style="background:rgba(0,153,255,.1);color:var(--accent2)">Growing Community</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MARKET -->
+<section class="sec" id="market">
+  <div class="fade-in">
+    <div class="sec-tag">Market Opportunity</div>
+    <div class="sec-title">A growing market with a clear gap</div>
+    <p class="sec-desc" style="margin-bottom:3rem">Existing energy monitoring tools are either too complex, too expensive, or too generic. EnergyX fills the gap with an accessible, AI-first, locally adapted solution.</p>
+  </div>
+  <div class="market-wrap fade-in">
+    <div>
+      <div style="font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.2rem">Target Segments</div>
+      <div class="market-cards">
+        <div class="market-seg">
+          <div class="seg-icon" style="background:rgba(0,212,170,.1)">🏠</div>
+          <div><div class="seg-title">Homeowners & Renters</div><div class="seg-text">Families and individuals who want to understand and reduce their monthly electricity bills. Smart home enthusiasts seeking affordable, intuitive energy management.</div></div>
+        </div>
+        <div class="market-seg">
+          <div class="seg-icon" style="background:rgba(0,153,255,.1)">🏢</div>
+          <div><div class="seg-title">Small & Medium Businesses</div><div class="seg-text">Offices, retail stores, and small enterprises looking to cut operational energy costs without complex enterprise energy management systems.</div></div>
+        </div>
+        <div class="market-seg">
+          <div class="seg-icon" style="background:rgba(255,184,0,.1)">🌿</div>
+          <div><div class="seg-title">Sustainability-Conscious Users</div><div class="seg-text">Individuals and organizations committed to reducing their environmental footprint who need actionable data to make meaningful changes.</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="revenue-card">
+        <div class="rev-title">Revenue Model</div>
+        <div class="rev-item">
+          <div class="rev-icon" style="background:rgba(0,212,170,.1)">📦</div>
+          <div class="rev-label">Subscription Plans</div>
+          <div class="rev-pct" style="color:var(--accent)">50%</div>
+        </div>
+        <div class="rev-bar-wrap"><div class="rev-bar" style="width:50%;background:var(--accent)"></div></div>
+        <div class="rev-item" style="margin-top:1rem">
+          <div class="rev-icon" style="background:rgba(0,153,255,.1)">🔧</div>
+          <div class="rev-label">Premium Services & Consulting</div>
+          <div class="rev-pct" style="color:var(--accent2)">30%</div>
+        </div>
+        <div class="rev-bar-wrap"><div class="rev-bar" style="width:30%;background:var(--accent2)"></div></div>
+        <div class="rev-item" style="margin-top:1rem">
+          <div class="rev-icon" style="background:rgba(255,184,0,.1)">🤝</div>
+          <div class="rev-label">Partnerships & Integrations</div>
+          <div class="rev-pct" style="color:var(--accent3)">20%</div>
+        </div>
+        <div class="rev-bar-wrap"><div class="rev-bar" style="width:20%;background:var(--accent3)"></div></div>
+        <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:0.5px solid var(--border2)">
+          <div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">Go-to-Market Channels</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+            <span style="font-size:.72rem;background:rgba(255,255,255,.04);border:0.5px solid var(--border2);padding:.2rem .6rem;border-radius:100px;color:var(--muted)">Social Media</span>
+            <span style="font-size:.72rem;background:rgba(255,255,255,.04);border:0.5px solid var(--border2);padding:.2rem .6rem;border-radius:100px;color:var(--muted)">Energy Providers</span>
+            <span style="font-size:.72rem;background:rgba(255,255,255,.04);border:0.5px solid var(--border2);padding:.2rem .6rem;border-radius:100px;color:var(--muted)">Google Ads</span>
+            <span style="font-size:.72rem;background:rgba(255,255,255,.04);border:0.5px solid var(--border2);padding:.2rem .6rem;border-radius:100px;color:var(--muted)">Events</span>
+            <span style="font-size:.72rem;background:rgba(255,255,255,.04);border:0.5px solid var(--border2);padding:.2rem .6rem;border-radius:100px;color:var(--muted)">Free Trial</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec" id="team" style="text-align:center">
+  <div class="fade-in">
+    <div class="sec-tag">The Team</div>
+    <div class="sec-title">The people behind EnergyX</div>
+    <p class="sec-desc" style="margin:1rem auto 0;max-width:480px">A focused, complementary team combining technical depth, market knowledge, and growth strategy to build the future of smart energy.</p>
+  </div>
+  <div class="fade-in" style="display:flex;justify-content:center;margin-top:3.5rem">
+    <div class="team-card" style="border-color:rgba(0,212,170,.25);position:relative;max-width:280px;width:100%">
+      <div style="position:absolute;top:1rem;right:1rem;font-size:.65rem;background:rgba(0,212,170,.12);color:var(--accent);padding:.2rem .6rem;border-radius:100px;font-weight:600;letter-spacing:.04em;text-transform:uppercase">Founder</div>
+      <div class="avatar" style="background:rgba(0,212,170,.12);color:var(--accent);width:70px;height:70px;font-size:1.5rem">Ad</div>
+      <div class="mem-name">Adam</div>
+      <div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:.5rem 0">
+        <span style="font-size:.7rem;background:rgba(0,212,170,.1);color:var(--accent);padding:.15rem .55rem;border-radius:100px;font-weight:600">CEO</span>
+        <span style="font-size:.7rem;background:rgba(0,153,255,.1);color:var(--accent2);padding:.15rem .55rem;border-radius:100px;font-weight:600">CTO</span>
+      </div>
+      <div class="mem-role">Leads the vision, product strategy, hardware development, and the mobile app. The driving force behind EnergyX.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<div class="road-bg">
+  <section class="sec" id="roadmap">
+    <div class="fade-in">
+      <div class="sec-tag">Roadmap</div>
+      <div class="sec-title">Where we're headed</div>
+      <p class="sec-desc">From MVP to global expansion — a clear path to building the leading energy management platform in the region.</p>
+    </div>
+    <div class="road-grid fade-in">
+      <div class="road-card">
+        <div class="road-phase" style="color:var(--accent)">Phase 1 — Done</div>
+        <div class="road-title">Foundation</div>
+        <div class="road-items">
+          <div class="road-item done">MVP mobile app</div>
+          <div class="road-item done">Google Play launch</div>
+          <div class="road-item done">Shelly EM integration</div>
+          <div class="road-item done">AI recommendation engine</div>
+          <div class="road-item done">ASSIP incubation prize</div>
+        </div>
+      </div>
+      <div class="road-card current">
+        <div class="road-phase" style="color:var(--accent3)">Phase 2 — Now</div>
+        <div class="road-title">Hardware & Growth</div>
+        <div class="road-items">
+          <div class="road-item done">Hardware procurement</div>
+          <div class="road-item">Prototype build & testing</div>
+          <div class="road-item">Safety certification</div>
+          <div class="road-item">Startup School 4 program</div>
+          <div class="road-item">User base growth</div>
+        </div>
+      </div>
+      <div class="road-card">
+        <div class="road-phase" style="color:var(--muted)">Phase 3 — Next</div>
+        <div class="road-title">Scale & Expand</div>
+        <div class="road-items">
+          <div class="road-item">B2B pilot program</div>
+          <div class="road-item">Energy provider partnerships</div>
+          <div class="road-item">Advanced analytics dashboard</div>
+          <div class="road-item">Subscription tier launch</div>
+          <div class="road-item">Regional marketing push</div>
+        </div>
+      </div>
+      <div class="road-card">
+        <div class="road-phase" style="color:var(--muted)">Phase 4 — Future</div>
+        <div class="road-title">Global Vision</div>
+        <div class="road-items">
+          <div class="road-item">International market entry</div>
+          <div class="road-item">Commercial sector expansion</div>
+          <div class="road-item">Energy trading features</div>
+          <div class="road-item">Renewable integration</div>
+          <div class="road-item">Series A fundraising</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- DOWNLOAD -->
+<div class="dl-section" id="download">
+  <div class="dl-glow"></div>
+  <div class="dl-inner fade-in">
+    <div class="sec-tag" style="text-align:center">Available Now</div>
+    <div class="sec-title" style="text-align:center">Start saving energy today</div>
+    <p style="color:var(--muted);font-size:.95rem;max-width:420px;margin:1rem auto 0;font-weight:300;line-height:1.7">Download EnergyX, connect your devices, and let AI do the heavy lifting. Your first insight is just minutes away.</p>
+    <a href="https://play.google.com/store/apps/details?id=az.energyx.app&hl=az" target="_blank" class="store-btn">
+      <span class="store-ic">▶</span>
+      <div><div style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Get it on</div><div style="font-weight:600;font-size:.95rem">Google Play</div></div>
+    </a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="fade-in" style="margin-bottom:3.5rem">
+    <div class="sec-tag">Contact Us</div>
+    <div class="sec-title">Let's build smarter<br>energy together</div>
+    <p class="sec-desc">Whether you're a potential partner, investor, or early user — we'd love to hear from you.</p>
+  </div>
+  <div class="contact-wrap fade-in">
+    <div class="contact-info-block">
+      <div class="c-info-item">
+        <div class="c-info-ico">📧</div>
+        <div><div class="c-info-label">Email</div><div class="c-info-val">mammadovadem842@gmail.com</div></div>
+      </div>
+      <div class="c-info-item">
+        <div class="c-info-ico">📍</div>
+        <div><div class="c-info-label">Location</div><div class="c-info-val">Baku, Azerbaijan</div></div>
+      </div>
+      <div class="c-info-item">
+        <div class="c-info-ico">🤝</div>
+        <div><div class="c-info-label">Partnerships</div><div class="c-info-val">mammadovadem842@gmail.com</div></div>
+      </div>
+      <div class="c-info-item">
+        <div class="c-info-ico">💼</div>
+        <div><div class="c-info-label">LinkedIn</div><div class="c-info-val">linkedin.com/company/energyx-az</div></div>
+      </div>
+      <div style="margin-top:1rem;padding:1.4rem;background:rgba(0,212,170,.04);border:0.5px solid rgba(0,212,170,.14);border-radius:12px">
+        <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.6rem">Platform Status</div>
+        <div style="display:flex;align-items:center;gap:.6rem">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 2s infinite"></div>
+          <span style="font-size:.88rem;color:var(--accent);font-weight:500">All systems operational</span>
+        </div>
+        <div style="margin-top:.8rem;font-size:.8rem;color:var(--muted)">App available on Google Play · 100+ active users</div>
+      </div>
+    </div>
+    <div class="contact-form-card">
+      <div class="f-group"><label class="f-label">Full Name</label><input type="text" class="f-input" placeholder="e.g. Anar Hasanov" id="fn"></div>
+      <div class="f-group"><label class="f-label">Email Address</label><input type="email" class="f-input" placeholder="you@example.com" id="fe"></div>
+      <div class="f-group"><label class="f-label">Subject</label><input type="text" class="f-input" placeholder="Partnership / Investment / General" id="fs"></div>
+      <div class="f-group"><label class="f-label">Message</label><textarea class="f-textarea" placeholder="Tell us about your interest or question..." id="fm"></textarea></div>
+      <button class="f-btn" onclick="submitForm()">Send Message →</button>
+      <div class="f-success" id="fsuccess">✅ Message sent! We'll get back to you shortly.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">⚡ Energy<span>X</span></div>
+  <ul class="footer-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#milestones">Milestones</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="color:var(--muted);font-size:.78rem">© 2025 EnergyX. Built with ❤️ in Baku, Azerbaijan.</div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+
+let ls=0;
+const nav=document.getElementById('mainNav');
+nav.style.transition='transform .3s ease';
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY;
+  nav.style.transform=s>ls&&s>80?'translateY(-100%)':'translateY(0)';
+  ls=s;
+});
+
+function submitForm(){
+  const n=document.getElementById('fn').value.trim();
+  const e=document.getElementById('fe').value.trim();
+  const sub=document.getElementById('fs').value.trim();
+  const m=document.getElementById('fm').value.trim();
+  if(!n||!e||!m){alert('Please fill in all required fields.');return;}
+  const subject=encodeURIComponent((sub||'EnergyX Website Message')+' — from '+n);
+  const body=encodeURIComponent('Name: '+n+'\nEmail: '+e+'\nSubject: '+(sub||'—')+'\n\nMessage:\n'+m);
+  window.location.href='mailto:mammadovadem842@gmail.com?subject='+subject+'&body='+body;
+  const s=document.getElementById('fsuccess');
+  s.style.display='block';
+  ['fn','fe','fs','fm'].forEach(id=>document.getElementById(id).value='');
+  setTimeout(()=>s.style.display='none',6000);
+}
+</script>
+</body>
+</html>
