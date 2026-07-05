@@ -246,6 +246,24 @@ footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-bet
   h1{font-size:2.3rem}
   .stats-row{flex-wrap:wrap}
 }
+
+/* VIDEO SECTION */
+.vid-section{background:var(--bg2);border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2);padding:5rem 2rem;text-align:center}
+.vid-btns{display:flex;gap:1rem;justify-content:center;margin:2rem 0 2.5rem;flex-wrap:wrap}
+.vid-btn{padding:.75rem 2.5rem;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .25s;letter-spacing:.02em;border:2px solid var(--accent)}
+.vid-btn.active{background:var(--accent);color:#04090E}
+.vid-btn:not(.active){background:transparent;color:var(--accent)}
+.vid-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,212,170,.25)}
+.vid-wrap{position:relative;width:100%;max-width:860px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.5);display:block;text-decoration:none;cursor:pointer;background:#000}
+.vid-wrap::after{content:'';display:block;padding-top:56.25%}
+.vid-thumb{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease,filter .4s ease}
+.vid-wrap:hover .vid-thumb{transform:scale(1.04);filter:brightness(.7)}
+.vid-play-overlay{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(4,9,14,.15);transition:background .3s}
+.vid-wrap:hover .vid-play-overlay{background:rgba(4,9,14,.35)}
+.vid-play-btn{width:84px;height:84px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,212,170,.5);transition:transform .3s}
+.vid-wrap:hover .vid-play-btn{transform:scale(1.12)}
+.vid-play-btn svg{width:32px;height:32px;margin-left:5px}
+.vid-hint{position:absolute;bottom:16px;right:20px;background:rgba(4,9,14,.7);color:#fff;font-size:.78rem;padding:.4rem .9rem;border-radius:100px;display:flex;align-items:center;gap:.4rem;font-weight:500;backdrop-filter:blur(6px)}
 </style>
 </head>
 <body>
@@ -258,6 +276,7 @@ footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-bet
     <li><a href="#features">Features</a></li>
     <li><a href="#milestones">Milestones</a></li>
     <li><a href="#team">Team</a></li>
+    <li><a href="#video">Demo</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
@@ -279,10 +298,10 @@ footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-bet
     <a href="#download" class="btn-hero-s">Download App →</a>
   </div>
   <div class="stats-row">
-    <div class="stat"><div class="stat-n">100+</div><div class="stat-l">App Downloads</div></div>
+    <div class="stat"><div class="stat-n">125+</div><div class="stat-l">App Downloads</div></div>
     <div class="stat"><div class="stat-n">25%</div><div class="stat-l">Avg. Savings</div></div>
     <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">AI Suggestions</div></div>
-    <div class="stat"><div class="stat-n">415+</div><div class="stat-l">LinkedIn Followers</div></div>
+    <div class="stat"><div class="stat-n">465+</div><div class="stat-l">LinkedIn Followers</div></div>
   </div>
 </section>
 
@@ -557,8 +576,8 @@ footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-bet
       </div>
       <div class="mile-card">
         <div class="mile-ico">📲</div>
-        <div class="mile-title">100+ App Downloads</div>
-        <div class="mile-sub">EnergyX reached 100+ downloads on Google Play, demonstrating real market demand and early user adoption for our AI-powered energy monitoring solution.</div>
+        <div class="mile-title">125+ App Downloads</div>
+        <div class="mile-sub">EnergyX reached 125+ downloads on Google Play, demonstrating real market demand and early user adoption for our AI-powered energy monitoring solution.</div>
         <div class="mile-tag" style="background:rgba(0,153,255,.1);color:var(--accent2)">Live on Google Play</div>
       </div>
       <div class="mile-card">
@@ -575,8 +594,8 @@ footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-bet
       </div>
       <div class="mile-card">
         <div class="mile-ico">👥</div>
-        <div class="mile-title">415+ LinkedIn Community</div>
-        <div class="mile-sub">Built an engaged professional community of 415+ followers on LinkedIn, with active content around smart energy, IoT, and startup building in Azerbaijan.</div>
+        <div class="mile-title">465+ LinkedIn Community</div>
+        <div class="mile-sub">Built an engaged professional community of 465+ followers on LinkedIn, with active content around smart energy, IoT, and startup building in Azerbaijan.</div>
         <div class="mile-tag" style="background:rgba(0,153,255,.1);color:var(--accent2)">Growing Community</div>
       </div>
     </div>
@@ -736,6 +755,27 @@ footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-bet
   </div>
 </div>
 
+
+<!-- VIDEO SECTION -->
+<div class="vid-section fade-in" id="video">
+  <div class="sec-tag" style="text-align:center">Platform Demo</div>
+  <div class="sec-title" style="text-align:center;font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.2vw,2.7rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:.8rem">See EnergyX in Action</div>
+  <p style="color:var(--muted);font-size:.97rem;max-width:500px;margin:.5rem auto 0;font-weight:300;line-height:1.7">Watch a full walkthrough of the platform — how it works, what it monitors, and how AI helps you save energy.</p>
+  <div class="vid-btns">
+    <button class="vid-btn active" onclick="switchVid('az',this)">🇦🇿 Azərbaycan</button>
+    <button class="vid-btn" onclick="switchVid('en',this)">🇬🇧 English</button>
+  </div>
+  <a href="https://youtu.be/4ZZb_qwnCTA" target="_blank" rel="noopener" class="vid-wrap" id="vidCard">
+    <img src="https://img.youtube.com/vi/4ZZb_qwnCTA/maxresdefault.jpg" alt="EnergyX Demo Video" class="vid-thumb" id="vidThumb" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/4ZZb_qwnCTA/hqdefault.jpg'">
+    <div class="vid-play-overlay">
+      <div class="vid-play-btn">
+        <svg viewBox="0 0 24 24" fill="#04090E"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </div>
+    <div class="vid-hint">▶ Watch on YouTube</div>
+  </a>
+</div>
+
 <!-- CONTACT -->
 <section class="sec" id="contact">
   <div class="fade-in" style="margin-bottom:3.5rem">
@@ -767,7 +807,7 @@ footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-bet
           <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 2s infinite"></div>
           <span style="font-size:.88rem;color:var(--accent);font-weight:500">All systems operational</span>
         </div>
-        <div style="margin-top:.8rem;font-size:.8rem;color:var(--muted)">App available on Google Play · 100+ active users</div>
+        <div style="margin-top:.8rem;font-size:.8rem;color:var(--muted)">App available on Google Play · 125+ active users</div>
       </div>
     </div>
     <div class="contact-form-card">
@@ -790,6 +830,7 @@ footer{padding:2.2rem 3rem;max-width:100%;display:flex;justify-content:space-bet
     <li><a href="#milestones">Milestones</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#video">Demo</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div style="color:var(--muted);font-size:.78rem">© 2025 EnergyX. Built with ❤️ in Baku, Azerbaijan.</div>
@@ -809,6 +850,17 @@ window.addEventListener('scroll',()=>{
   nav.style.transform=s>ls&&s>80?'translateY(-100%)':'translateY(0)';
   ls=s;
 });
+
+function switchVid(lang, btn){
+  const ids={az:'4ZZb_qwnCTA',en:'5bDboIPsFlk'};
+  const id = ids[lang];
+  document.getElementById('vidCard').href = 'https://youtu.be/' + id;
+  const thumb = document.getElementById('vidThumb');
+  thumb.onerror = function(){ this.onerror=null; this.src='https://img.youtube.com/vi/'+id+'/hqdefault.jpg'; };
+  thumb.src = 'https://img.youtube.com/vi/' + id + '/maxresdefault.jpg';
+  document.querySelectorAll('.vid-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
 
 function submitForm(){
   const n=document.getElementById('fn').value.trim();
